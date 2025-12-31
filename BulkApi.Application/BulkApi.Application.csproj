@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\BulkApi.Domain\BulkApi.Domain.csproj" />
+	  <ProjectReference Include="..\BulkApi.Infrastructure\BulkApi.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

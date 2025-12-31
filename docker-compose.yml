@@ -1,0 +1,36 @@
+﻿services:
+  mysql:
+    image: mysql:8.0
+    container_name: bulkapi-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: bulkapi
+      MYSQL_USER: app
+      MYSQL_PASSWORD: apppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpass"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  api:
+    build:
+      context: .
+      dockerfile: BulkApi.Api/Dockerfile
+    container_name: bulkapi-api
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__Default: "Server=mysql;Port=3306;Database=bulkapi;User=app;Password=apppass;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
