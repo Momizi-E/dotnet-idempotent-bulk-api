@@ -1,3 +1,5 @@
+![CI](https://github.com/Momizi-E/dotnet-idempotent-bulk-api/actions/workflows/ci.yml/badge.svg?branch=master)
+
 # dotnet-idempotent-bulk-api
 
 Idempotent POST Web API sample built with **.NET 8**, **ASP.NET Core**, **MediatR (CQRS)**, **EF Core**, and **MySQL**.
