@@ -1,4 +1,6 @@
-﻿namespace BulkApi.Domain.Entities;
+namespace BulkApi.Domain.Entities;
+
+using BulkApi.Domain.Exceptions;
 
 public sealed class IdempotencyRecord
 {
@@ -14,5 +16,16 @@ public sealed class IdempotencyRecord
         Key = key;
         ResponseJson = responseJson;
         CreatedAtUtc = DateTime.UtcNow;
+    }
+
+    public void SetResponse(string responseJson)
+    {
+        if (string.IsNullOrWhiteSpace(responseJson))
+            throw new DomainException("ResponseJson cannot be empty.");
+
+        if (!string.IsNullOrWhiteSpace(ResponseJson))
+            throw new DomainException("ResponseJson has already been set for this idempotency record.");
+
+        ResponseJson = responseJson;
     }
 }
